@@ -22,6 +22,13 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import Image from 'next/image'
+import logo from "../../../public/assets/logo-112.jpeg"
+import { loginUser } from '@/utils/loginUser'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { useUser } from '@/context/UserContext'
+
 
 const loginSchema = z.object({
     email: z.string().email('Please enter a valid email address'),
@@ -39,27 +46,28 @@ interface LoginFormProps {
 
 export function LoginForm({ isOpen, onClose, onSwitchToSignup }: LoginFormProps) {
     const [isLoading, setIsLoading] = useState(false)
-
+    const { login } = useUser();
+    const router = useRouter();
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
             email: '',
-            password: '',
-            rememberMe: false,
+            password: ''
         },
     })
 
     const onSubmit = async (data: LoginFormValues) => {
         setIsLoading(true)
-        try {
-            // Handle login logic here
-            console.log('Login form submitted:', data)
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000))
-            onClose()
-        } catch (error) {
-            console.error('Login error:', error)
-        } finally {
+        const res = await loginUser(data);
+        console.log("login res ", res)
+        if (res.success) {
+            toast.success("Login successful!");
+            login(res.user.user);
+            router.push("/");
+            setIsLoading(false)
+            onClose();
+        } else {
+            toast.error(res.message || "Login failed!");
             setIsLoading(false)
         }
     }
@@ -67,14 +75,16 @@ export function LoginForm({ isOpen, onClose, onSwitchToSignup }: LoginFormProps)
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-md max-h-[80vh] overflow-y-auto">
-                <DialogHeader className="text-center">
+                <DialogHeader className="text-center flex items-center">
                     {/* Logo */}
-                    <div className="flex items-center justify-center gap-2 mb-4">
-                        <div className="w-12 h-12 bg-[#FF2B85] rounded-lg flex items-center justify-center">
-                            <span className="text-white text-2xl font-bold">🍴</span>
-                        </div>
-                        <span className="text-[#FF2B85] text-2xl font-bold">FoodNest</span>
-                    </div>
+                    <Image
+                        src={logo}
+                        alt='logo'
+                        height={60}
+                        width={100}
+                        className='object-cover'
+
+                    />
 
                     {/* Title */}
                     <DialogTitle className="text-2xl font-bold text-gray-800">Welcome back</DialogTitle>
@@ -121,26 +131,8 @@ export function LoginForm({ isOpen, onClose, onSwitchToSignup }: LoginFormProps)
                             )}
                         />
 
-                        <div className="flex items-center justify-between">
-                            <FormField
-                                control={form.control}
-                                name="rememberMe"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                        <FormControl>
-                                            <Checkbox
-                                                checked={field.value}
-                                                onCheckedChange={field.onChange}
-                                            />
-                                        </FormControl>
-                                        <div className="space-y-1 leading-none">
-                                            <FormLabel className="text-sm font-normal text-gray-600">
-                                                Remember me
-                                            </FormLabel>
-                                        </div>
-                                    </FormItem>
-                                )}
-                            />
+                        <div className="flex items-center justify-end">
+
                             <a href="#" className="text-sm text-[#FF2B85] hover:text-pink-600 font-medium">
                                 Forgot password?
                             </a>
@@ -159,7 +151,7 @@ export function LoginForm({ isOpen, onClose, onSwitchToSignup }: LoginFormProps)
                 {/* Register Link */}
                 <div className="mt-6 text-center">
                     <p className="text-gray-600">
-                        Don't have an account?{' '}
+                        Do not have an account?{' '}
                         <button
                             onClick={() => {
                                 onClose()

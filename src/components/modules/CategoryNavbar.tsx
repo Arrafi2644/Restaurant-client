@@ -17,8 +17,8 @@ const categories: Category[] = [
   {_id:"1234567", name: "Delicious Pastry", count: 3 },
   {_id:"123456", name: "Dessert", count: 9 },
   {_id:"12345", name: "Creamy Cupcakes", count: 5 },
-  {_id:"1234", name: "Beverages", count: 8 },
-  {_id:"123", name: "Warm Hot Drinks", count: 12 },
+  {_id:"1234d", name: "Beverages", count: 8 },
+
 ];
 
 export default function CategoryNavbar() {
@@ -60,8 +60,8 @@ export default function CategoryNavbar() {
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 return (
-  <div className="sticky top-24 lg:top-20 z-30 bg-white border-b">
-    <div className="container mx-auto px-4 py-4">
+  <div className="container mx-auto px-4 md:px-6 lg:px-8 sticky top-34 lg:top-26 z-30 bg-white">
+    <div className=" py-4">
 
       {/* WRAPPER */}
       <div className="flex flex-col lg:flex-row lg:items-center gap-3">
@@ -84,7 +84,7 @@ return (
               size="icon"
               variant="ghost"
               onClick={() => scrollContainer("left")}
-              className="shrink-0"
+              className="shrink-0 border rounded-full bg-gray-50"
             >
               <ChevronLeft />
             </Button>
@@ -118,7 +118,7 @@ return (
               size="icon"
               variant="ghost"
               onClick={() => scrollContainer("right")}
-              className="shrink-0"
+              className="shrink-0  border rounded-full bg-gray-50"
             >
               <ChevronRight />
             </Button>

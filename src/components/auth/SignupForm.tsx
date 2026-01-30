@@ -22,9 +22,14 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import logo from "../../../public/assets/logo-112.jpeg"
+import Image from 'next/image'
+import { registerUser } from '@/utils/registerUser'
+import { toast } from 'sonner'
+
 
 const signupSchema = z.object({
-    fullname: z.string().min(2, 'Full name must be at least 2 characters'),
+    name: z.string().min(2, 'Full name must be at least 2 characters'),
     email: z.string().email('Please enter a valid email address'),
     phone: z.string().min(10, 'Please enter a valid phone number'),
     address: z.string().min(5, 'Address must be at least 5 characters'),
@@ -52,7 +57,7 @@ export function SignupForm({ isOpen, onClose, onSwitchToLogin }: SignupFormProps
     const form = useForm<SignupFormValues>({
         resolver: zodResolver(signupSchema),
         defaultValues: {
-            fullname: '',
+            name: '',
             email: '',
             phone: '',
             address: '',
@@ -62,32 +67,72 @@ export function SignupForm({ isOpen, onClose, onSwitchToLogin }: SignupFormProps
         },
     })
 
+    // const onSubmit = async (data: SignupFormValues) => {
+    //     setIsLoading(true)
+    //     console.log("register data ", data)
+    //     const res = await registerUser(data);
+    //     console.log("register res ", res)
+    //     if (res.success) {
+    //         toast.success("Register successful!");
+    //         setIsLoading(false)
+    //     } else {
+    //         toast.error(res.message || "Login failed!");
+    //         setIsLoading(false)
+    //     }
+    // }
+
+    //     "name": "Karim",
+    //     "email": "karim@gmail.com",
+    //     "phone": "01751166818",
+    //     "address": "tetulia",
+    //     "password": "12345678"
+
     const onSubmit = async (data: SignupFormValues) => {
-        setIsLoading(true)
         try {
-            // Handle signup logic here
-            console.log('Signup form submitted:', data)
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000))
-            onClose()
+            setIsLoading(true);
+
+            const formData = new FormData();
+
+            const payload = {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                address: data.address,
+                password: data.password,
+            };
+
+            formData.append("data", JSON.stringify(payload));
+
+            const res = await registerUser(formData);
+
+            if (res.success) {
+                toast.success("Register successful!");
+                onClose();
+            } else {
+                toast.error(res.message || "Registration failed");
+            }
         } catch (error) {
-            console.error('Signup error:', error)
+            console.error(error);
+            toast.error("Registration failed");
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
+
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-md max-h-[80vh] overflow-y-auto">
-                <DialogHeader className="text-center">
-                    {/* Logo */}
-                    <div className="flex items-center justify-center gap-2 mb-4">
-                        <div className="w-12 h-12 bg-[#FF2B85] rounded-lg flex items-center justify-center">
-                            <span className="text-white text-2xl font-bold">🍴</span>
-                        </div>
-                        <span className="text-[#FF2B85] text-2xl font-bold">FoodNest</span>
-                    </div>
+                <DialogHeader className="text-center flex items-center">
+
+                    <Image
+                        src={logo}
+                        alt='logo'
+                        height={80}
+                        width={120}
+                        className='object-cover'
+
+                    />
 
                     {/* Title */}
                     <DialogDescription className="text-gray-800 font-medium">
@@ -99,7 +144,7 @@ export function SignupForm({ isOpen, onClose, onSwitchToLogin }: SignupFormProps
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                         <FormField
                             control={form.control}
-                            name="fullname"
+                            name="name"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Full name</FormLabel>

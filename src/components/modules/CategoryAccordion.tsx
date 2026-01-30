@@ -24,9 +24,8 @@ type Food = {
     totalSell: number;
 };
 
-export default function CategoryCard({ category }: Props) {
+export default function CategoryAccordion({ category }: Props) {
     const foods = [
-        // 🍰 Delicious Pastry
         {
             _id: "65f001a1c001a001a001a001",
             name: "Chocolate Croissant",
@@ -34,7 +33,17 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 180,
             image: "https://i.ibb.co/pastry1.jpg",
-            totalSell: 320
+            totalSell: 320,
+            ingredients: [
+                {
+                    name: "Tomato sos",
+                    price: 20
+                },
+                {
+                    name: "Testing salt",
+                    price: 20
+                }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a002",
@@ -43,7 +52,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 160,
             image: "https://i.ibb.co/pastry2.jpg",
-            totalSell: 280
+            totalSell: 280,
+            ingredients: [
+                { name: "Heavy Cream", price: 60 },
+                { name: "Sugar", price: 25 },
+                { name: "Cocoa Powder", price: 45 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a003",
@@ -52,7 +66,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 200,
             image: "https://i.ibb.co/pastry3.jpg",
-            totalSell: 190
+            totalSell: 190,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a004",
@@ -61,7 +76,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 220,
             image: "https://i.ibb.co/pastry4.jpg",
-            totalSell: 410
+            totalSell: 410,
+            ingredients: [
+                { name: "Heavy Cream", price: 60 },
+                { name: "Sugar", price: 25 },
+                { name: "Cocoa Powder", price: 45 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a005",
@@ -70,7 +90,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 190,
             image: "https://i.ibb.co/pastry5.jpg",
-            totalSell: 350
+            totalSell: 350,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a006",
@@ -79,7 +100,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 210,
             image: "https://i.ibb.co/pastry6.jpg",
-            totalSell: 270
+            totalSell: 270,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a007",
@@ -88,7 +110,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 230,
             image: "https://i.ibb.co/pastry7.jpg",
-            totalSell: 150
+            totalSell: 150,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a008",
@@ -97,7 +120,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Delicious Pastry",
             price: 240,
             image: "https://i.ibb.co/pastry8.jpg",
-            totalSell: 300
+            totalSell: 300,
+            ingredients: []
         },
 
         // 🍮 Dessert
@@ -108,7 +132,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 250,
             image: "https://i.ibb.co/dessert1.jpg",
-            totalSell: 500
+            totalSell: 500,
+            ingredients: [
+                { name: "Heavy Cream", price: 60 },
+                { name: "Sugar", price: 25 },
+                { name: "Cocoa Powder", price: 45 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a010",
@@ -117,7 +146,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 180,
             image: "https://i.ibb.co/dessert2.jpg",
-            totalSell: 430
+            totalSell: 430,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a011",
@@ -126,7 +156,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 320,
             image: "https://i.ibb.co/dessert3.jpg",
-            totalSell: 380
+            totalSell: 380,
+            ingredients: [
+                { name: "Butter", price: 40 },
+                { name: "Flour", price: 15 },
+                { name: "Chocolate", price: 50 }   // or Almonds, Strawberry cream, etc.
+            ]
         },
         {
             _id: "65f001a1c001a001a001a012",
@@ -135,7 +170,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 300,
             image: "https://i.ibb.co/dessert4.jpg",
-            totalSell: 460
+            totalSell: 460,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a013",
@@ -144,7 +180,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 280,
             image: "https://i.ibb.co/dessert5.jpg",
-            totalSell: 520
+            totalSell: 520,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a014",
@@ -153,7 +190,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 200,
             image: "https://i.ibb.co/dessert6.jpg",
-            totalSell: 290
+            totalSell: 290,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a015",
@@ -162,7 +200,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 350,
             image: "https://i.ibb.co/dessert7.jpg",
-            totalSell: 610
+            totalSell: 610,
+            ingredients: [
+                { name: "Butter", price: 40 },
+                { name: "Flour", price: 15 },
+                { name: "Chocolate", price: 50 }   // or Almonds, Strawberry cream, etc.
+            ]
         },
         {
             _id: "65f001a1c001a001a001a016",
@@ -171,7 +214,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Dessert",
             price: 220,
             image: "https://i.ibb.co/dessert8.jpg",
-            totalSell: 400
+            totalSell: 400,
+            ingredients: []
         },
 
         // 🧁 Creamy Cupcakes
@@ -182,7 +226,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 120,
             image: "https://i.ibb.co/cupcake1.jpg",
-            totalSell: 700
+            totalSell: 700,
+            ingredients: [
+                { name: "Heavy Cream", price: 60 },
+                { name: "Sugar", price: 25 },
+                { name: "Cocoa Powder", price: 45 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a018",
@@ -191,7 +240,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 140,
             image: "https://i.ibb.co/cupcake2.jpg",
-            totalSell: 820
+            totalSell: 820,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a019",
@@ -200,7 +250,11 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 160,
             image: "https://i.ibb.co/cupcake3.jpg",
-            totalSell: 650
+            totalSell: 650,
+            ingredients: [
+                { name: "Milk", price: 30 },
+                { name: "Coffee Beans", price: 50 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a020",
@@ -209,7 +263,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 150,
             image: "https://i.ibb.co/cupcake4.jpg",
-            totalSell: 500
+            totalSell: 500,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a021",
@@ -218,7 +273,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 170,
             image: "https://i.ibb.co/cupcake5.jpg",
-            totalSell: 420
+            totalSell: 420,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a022",
@@ -227,7 +283,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 160,
             image: "https://i.ibb.co/cupcake6.jpg",
-            totalSell: 480
+            totalSell: 480,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a023",
@@ -236,7 +293,11 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 155,
             image: "https://i.ibb.co/cupcake7.jpg",
-            totalSell: 390
+            totalSell: 390,
+            ingredients: [
+                { name: "Milk", price: 30 },
+                { name: "Coffee Beans", price: 50 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a024",
@@ -245,7 +306,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Creamy Cupcakes",
             price: 180,
             image: "https://i.ibb.co/cupcake8.jpg",
-            totalSell: 560
+            totalSell: 560,
+            ingredients: []
         },
 
         // 🥤 Beverages
@@ -256,7 +318,12 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 150,
             image: "https://i.ibb.co/bev1.jpg",
-            totalSell: 900
+            totalSell: 900,
+            ingredients: [
+                { name: "Heavy Cream", price: 60 },
+                { name: "Sugar", price: 25 },
+                { name: "Cocoa Powder", price: 45 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a026",
@@ -265,7 +332,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 180,
             image: "https://i.ibb.co/bev2.jpg",
-            totalSell: 760
+            totalSell: 760,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a027",
@@ -274,7 +342,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 120,
             image: "https://i.ibb.co/bev3.jpg",
-            totalSell: 840
+            totalSell: 840,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a028",
@@ -283,7 +352,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 190,
             image: "https://i.ibb.co/bev4.jpg",
-            totalSell: 680
+            totalSell: 680,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a029",
@@ -292,7 +362,11 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 220,
             image: "https://i.ibb.co/bev5.jpg",
-            totalSell: 720
+            totalSell: 720,
+            ingredients: [
+                { name: "Milk", price: 30 },
+                { name: "Coffee Beans", price: 50 }
+            ]
         },
         {
             _id: "65f001a1c001a001a001a030",
@@ -301,7 +375,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 210,
             image: "https://i.ibb.co/bev6.jpg",
-            totalSell: 650
+            totalSell: 650,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a031",
@@ -310,7 +385,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 110,
             image: "https://i.ibb.co/bev7.jpg",
-            totalSell: 880
+            totalSell: 880,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a032",
@@ -319,7 +395,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Beverages",
             price: 140,
             image: "https://i.ibb.co/bev8.jpg",
-            totalSell: 730
+            totalSell: 730,
+            ingredients: []
         },
 
         // ☕ Warm Hot Drinks
@@ -330,7 +407,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 180,
             image: "https://i.ibb.co/hot1.jpg",
-            totalSell: 950
+            totalSell: 950,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a034",
@@ -339,7 +417,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 190,
             image: "https://i.ibb.co/hot2.jpg",
-            totalSell: 880
+            totalSell: 880,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a035",
@@ -348,7 +427,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 200,
             image: "https://i.ibb.co/hot3.jpg",
-            totalSell: 920
+            totalSell: 920,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a036",
@@ -357,7 +437,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 120,
             image: "https://i.ibb.co/hot4.jpg",
-            totalSell: 860
+            totalSell: 860,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a037",
@@ -366,7 +447,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 150,
             image: "https://i.ibb.co/hot5.jpg",
-            totalSell: 780
+            totalSell: 780,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a038",
@@ -375,7 +457,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 130,
             image: "https://i.ibb.co/hot6.jpg",
-            totalSell: 890
+            totalSell: 890,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a039",
@@ -384,7 +467,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 140,
             image: "https://i.ibb.co/hot7.jpg",
-            totalSell: 910
+            totalSell: 910,
+            ingredients: []
         },
         {
             _id: "65f001a1c001a001a001a040",
@@ -393,7 +477,8 @@ export default function CategoryCard({ category }: Props) {
             category: "Warm Hot Drinks",
             price: 160,
             image: "https://i.ibb.co/hot8.jpg",
-            totalSell: 840
+            totalSell: 840,
+            ingredients: []
         }
     ];
 
@@ -415,7 +500,8 @@ export default function CategoryCard({ category }: Props) {
 
     return (
         <Accordion type="single" collapsible className="w-full border rounded-xl ">
-            <AccordionItem id={`section-${category.name}`} value={category._id} className="border rounded-xl scroll-mt-56 lg:scroll-mt-40 ">
+            <AccordionItem id={`section-${category.name}`} value={category._id} className="border  data-[state=open]:bg-pink-50
+    transition-colors rounded-xl scroll-mt-66 lg:scroll-mt-46 ">
                 {/* Header */}
                 <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
                     <div className="flex items-center justify-between gap-6 w-full">
@@ -438,7 +524,16 @@ export default function CategoryCard({ category }: Props) {
                 </AccordionTrigger>
 
                 {/* Expanded Content */}
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent
+                    className="
+    px-6 pb-6
+    data-[state=open]:animate-accordion-down
+    data-[state=closed]:animate-accordion-up
+    animation-duration-[3000ms]!
+    ease-in-out
+  "
+                >
+
                     {(
                         category.name === "Popular"
                             ? popularFoods
@@ -453,37 +548,7 @@ export default function CategoryCard({ category }: Props) {
                                 ? popularFoods
                                 : foods.filter(food => food.category === category.name)
                             ).map(food => (
-                                // <div
-                                //     key={food._id}
-                                //     className="border hover:bg-pink-100 relative p-4 rounded-xl overflow-hidden hover:shadow-md transition flex items-center justify-between"
-                                // >
-
-                                //     {/* Content */}
-                                //     <div className=" space-y-2">
-                                //         <h5 className="font-semibold">{food.name}</h5>
-                                //         <div className="flex items-center justify-between pt-2">
-                                //             <span className="font-bold text-primary">
-                                //                 €{food.price}
-                                //             </span>
-                                //         </div>
-                                //         <p className="text-sm text-muted-foreground line-clamp-2">
-                                //             {food.description}
-                                //         </p>
-
-                                //     </div>
-
-                                //     <Button className="absolute right-5 bottom-5 cursor-pointer hover:text-white bg-white rounded-full text-gray-800" size="icon"><Plus size={28} /></Button>
-
-                                //     {/* Image */}
-                                //     <Image
-                                //         src={food.image}
-                                //         alt={food.name}
-                                //         height={128}
-                                //         width={128}
-                                //         className=" h-28 w-28 md:h-32 md:w-32 rounded-lg object-cover object-center"
-                                //     />
-                                // </div>
-                                <FoodCard food={food} />
+                                <FoodCard key={food._id} food={food} />
                             ))}
                         </div>
                     )}

@@ -1,34 +1,69 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapPin, ShoppingCart, User, ChevronDown } from 'lucide-react';
-import Link from 'next/link';
 import { Button } from '../ui/button';
 import { LoginForm, SignupForm } from '../auth';
+import Image from 'next/image';
+import logo from "../../../public/assets/logo-112.jpeg"
+import { getCart } from '@/utils/cart-helper';
+import AllCarts from '../modules/AllCarts';
+import { NavbarDropdown } from '../modules/NavbarDropdown';
+import { useUser } from '@/context/UserContext';
 
-const Navbar = () => {
+export default function Navbar() {
+    const { user, logout } = useUser();
+
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isSignupOpen, setIsSignupOpen] = useState(false);
-    const [isLangOpen, setIsLangOpen] = useState(false);
+    const [cartItems, setCartItems] = useState(() => getCart());
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
+
+    useEffect(() => {
+        const handleCartUpdate = () => {
+            setCartItems(getCart());
+        };
+
+        window.addEventListener("cart-updated", handleCartUpdate);
+
+        handleCartUpdate();
+
+        return () => {
+            window.removeEventListener("cart-updated", handleCartUpdate);
+        };
+    }, []);
+
+    const cartCount = cartItems.length;
 
     return (
         <>
             <nav className="w-full bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-                    <div className="flex items-center justify-between h-16 font-medium lg:h-20 relative">
-                        {/* Mobile User Icon */}
-                        <button
-                            className="lg:hidden p-2  rounded-lg transition-all duration-300 hover:scale-105 hover:bg-pink-500 cursor-pointer"
-                            onClick={() => setIsLoginOpen(true)}
-                        >
-                            <User className="w-6 h-6 text-gray-900" />
-                        </button>
-                        <div className="flex items-center gap-2 shrink-0 flex-1 justify-center lg:flex-initial lg:justify-start">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white text-xl sm:text-2xl font-bold">🍴</span>
-              </div>
-              <span className="text-pink-500 text-xl sm:text-2xl font-bold">FoodNest</span>
-            </div>
+                    <div className="flex items-center justify-between h-26 font-medium lg:h-26 relative">
+
+
+                      <div className='lg:hidden'>
+                          {
+                            user ?
+                                <NavbarDropdown user={user} onLogout={logout} />
+                                :
+                                < button
+                                    className=" p-2 border-2 rounded-full cursor-pointer transition-all duration-300 hover:scale-105 hover:bg-pink-500"
+                                    onClick={() => setIsLoginOpen(true)}
+                                >
+                                    <User className="w-6 h-6 text-gray-900" />
+                                </button>
+                        }
+                      </div>
+                        <Image
+                            src={logo}
+                            alt='logo'
+                            height={80}
+                            width={120}
+                            className='object-cover'
+
+                        />
 
                         {/* Desktop Address */}
                         <div className="hidden lg:flex items-center gap-2 flex-1 max-w-md mx-8 text-gray-900">
@@ -36,35 +71,46 @@ const Navbar = () => {
                             <span className="text-sm truncate">Via Decio Filipponi, 1, 00136 Roma RM, Italy</span>
                         </div>
 
-                            {/* Mobile & Desktop Cart Icon */}
-                        <button className=" block lg:hidden p-2 hover:bg-gray-50 not-visited:rounded-lg transition-all duration-300 hover:scale-105 relative">
+                        {/* Mobile & Desktop Cart Icon */}
+                        <button onClick={() => setIsCartOpen(true)} className=" block lg:hidden p-2 hover:bg-gray-50 not-visited:rounded-lg transition-all duration-300 hover:scale-105 relative">
+
                             <ShoppingCart className="w-6 h-6 text-gray-900" />
                             <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#FF2B85] text-white text-xs rounded-full flex items-center justify-center">
-                                0
+                                {cartCount}
                             </span>
                         </button>
                         {/* Desktop Actions */}
                         <div className="hidden lg:flex items-center gap-3 justify-center">
-                        {/* Mobile & Desktop Cart Icon */}
-                        <button className="p-2 mr-2 mt-2 hidden lg:block hover:bg-gray-50 not-visited:rounded-lg transition-all duration-300 hover:scale-105 relative">
-                            <ShoppingCart className="w-6 h-6 text-gray-900" />
-                            <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#FF2B85] text-white text-xs rounded-full flex items-center justify-center">
-                                0
-                            </span>
-                        </button>    
-                            <Button
-                                onClick={() => setIsLoginOpen(true)}
-                                variant="outline"
-                                className="px-6 py-2 cursor-pointer text-gray-900 font-medium hover:bg-[#FF2B85] border-gray-900 hover:text-white hover:scale-105 rounded-lg transition-all duration-300"
-                            >
-                                Log in
-                            </Button>
-                            <Button
-                                onClick={() => setIsSignupOpen(true)}
-                                className="px-6 py-2 bg-[#FF2B85] cursor-pointer text-white font-medium rounded-lg hover:bg-pink-500 hover:scale-105 transition-all whitespace-nowrap duration-300"
-                            >
-                                Sign Up
-                            </Button>
+                            {/* Mobile & Desktop Cart Icon */}
+                            <button onClick={() => setIsCartOpen(true)} className="p-2 mr-2 mt-2 hidden lg:block hover:bg-gray-50 not-visited:rounded-lg transition-all duration-300 hover:scale-105 relative">
+                                <ShoppingCart className="w-6 h-6 text-gray-900" />
+                                <span
+
+                                    className="absolute -top-1 -right-1 w-5 h-5 bg-[#FF2B85] text-white text-xs rounded-full flex items-center justify-center">
+                                    {cartCount}
+                                </span>
+
+                            </button>
+                            {
+                                user ?
+                                    <NavbarDropdown user={user} onLogout={logout} />
+                                    :
+                                    <div className='flex items-center gap-3'>
+                                        <Button
+                                            onClick={() => setIsLoginOpen(true)}
+                                            variant="outline"
+                                            className="px-6 py-2 cursor-pointer text-gray-900 font-medium hover:bg-[#FF2B85] border-gray-900 hover:text-white hover:scale-105 rounded-lg transition-all duration-300"
+                                        >
+                                            Log in
+                                        </Button>
+                                        <Button
+                                            onClick={() => setIsSignupOpen(true)}
+                                            className="px-6 py-2 bg-[#FF2B85] cursor-pointer text-white font-medium rounded-lg hover:bg-pink-500 hover:scale-105 transition-all whitespace-nowrap duration-300"
+                                        >
+                                            Sign Up
+                                        </Button>
+                                    </div>
+                            }
                         </div>
 
                     </div>
@@ -75,12 +121,13 @@ const Navbar = () => {
                         <span className="truncate">Via Decio Filipponi, 1, 00136 Roma RM, Italy</span>
                     </div>
                 </div>
-            </nav>
+            </nav >
 
             {/* Login Modal */}
-            <LoginForm
+            < LoginForm
                 isOpen={isLoginOpen}
-                onClose={() => setIsLoginOpen(false)}
+                onClose={() => setIsLoginOpen(false)
+                }
                 onSwitchToSignup={() => setIsSignupOpen(true)}
             />
 
@@ -90,8 +137,13 @@ const Navbar = () => {
                 onClose={() => setIsSignupOpen(false)}
                 onSwitchToLogin={() => setIsLoginOpen(true)}
             />
+
+            {/* Cart Sidebar */}
+            <AllCarts
+                isOpen={isCartOpen}
+                onClose={() => setIsCartOpen(false)}
+                cartItems={cartItems}
+            />
         </>
     );
 };
-
-export default Navbar;

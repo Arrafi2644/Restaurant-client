@@ -1,5 +1,4 @@
-import React from 'react'
-import CategoryCard from './CategoryCard';
+import CategoryAccordion from './CategoryAccordion';
 export interface Category {
     _id: string;
     name: string;
@@ -44,18 +43,12 @@ export default function CategoryWiseFoodSection() {
             count: 8,
             description: 'Refreshing cold drinks and smoothies to keep you energized.',
             categoryImg: 'https://res.cloudinary.com/dog2ins5h/image/upload/v1768929000/vegetarian-buddha-bowl-raw-vegetables-baked-potatoes-bowl-vegan-meal-healthy-detox-food-concept_ylkqls.webp'
-        },
-        {
-            _id: "123451",
-            name: 'Warm Hot Drinks',
-            count: 12,
-            description: 'Comforting hot beverages perfect for any time of the day.',
-            categoryImg: 'https://res.cloudinary.com/dog2ins5h/image/upload/v1768928243/crispy-tubtim-fish-salad-thai-food-herb_hmqamy.webp'
         }
+        
     ];
 
     return (
-        <div className='container mx-auto px-4 md:px-6 lg:px-8'>
+        <div className=''>
             <h3 className='text-3xl lg:text-4xl font-bold mb-2'>Explore Food By Category</h3>
             <p className='mb-4'>
             Discover delicious dishes from every category, made just for you.
@@ -63,7 +56,7 @@ export default function CategoryWiseFoodSection() {
             
             <div className='space-y-4'>
                 {
-                    categories.map(category => <CategoryCard key={category._id} category={category} />)
+                    categories.map(category => <CategoryAccordion key={category._id} category={category} />)
                 }
 
             </div>
